@@ -1,14 +1,14 @@
 import logging
-logger = logging.getLogger()
+logging.basicConfig(filename='seleccion.log', level=logging.INFO)
 
 def minimo(vector, a_partir_de=0):
     if not bool(vector):
-        logger.error('[*]ERROR el vector no debe ser vacio')
+        logging.error('[*]ERROR el vector no debe ser vacio')
         return vector
     indice_min = a_partir_de
     for indice, valor in enumerate(vector[a_partir_de:]):
         if valor < vector[indice_min]:
-            logger.info('indice_min era {}, y ahora es {}'.format(indice_min, indice))
+            logging.info('indice_min era {}, y ahora es {}'.format(indice_min, indice))
             indice_min = indice 
     return indice_min + a_partir_de # corro el indice en caso de que sea necesario
 
