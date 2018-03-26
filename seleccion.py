@@ -8,7 +8,7 @@ def minimo(vector, a_partir_de=0):
     indice_min = a_partir_de
     for indice, valor in enumerate(vector[a_partir_de:]):
         if valor < vector[indice_min]:
-            logging.info('indice_min era {}, y ahora es {}'.format(indice_min, indice))
+            logging.debug('indice_min era {}, y ahora es {}'.format(indice_min, indice))
             indice_min = indice + a_partir_de # corro el indice en caso de que sea necesario
     return indice_min
 
