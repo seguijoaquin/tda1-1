@@ -1,5 +1,5 @@
 import logging
-logging.basicConfig(filename='seleccion.log', level=logging.INFO)
+logging.basicConfig(filename='ordenamiento.log', level=logging.INFO)
 
 def minimo(vector, a_partir_de=0):
     if not bool(vector):
