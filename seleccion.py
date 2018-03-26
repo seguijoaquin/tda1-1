@@ -18,4 +18,6 @@ def intercambia(vector, indice_a, indice_b):
 
 def seleccion(vector):
     for indice,valor in enumerate(vector[:-1]):
-        intercambia(vector, indice, minimo())
+        indice_minimo = minimo(vector, a_partir_de=indice)
+        intercambia(vector, indice, indice_minimo)
+    return vector
