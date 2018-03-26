@@ -17,6 +17,8 @@ def merge(izquierdo, derecho):
     return resultado
 
 def merge_sort(vector):
+    if len(vector) < 2:
+        return vector
     izquierdo_ordenado = merge_sort(vector[:len(vector)//2])
     derecho_ordenado = merge_sort(vector[len(vector)//2:])
     return merge(izquierdo_ordenado, derecho_ordenado) 
