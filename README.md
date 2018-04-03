@@ -1,6 +1,11 @@
 # tda1-1
 Tp 1 de teoria de algoritmos
 
+Pruebas
+# uso recomendado
+$pip3 install pytest
+$pytest
+
 Trello
 
 https://trello.com/b/n0LAXF4g/tp1
