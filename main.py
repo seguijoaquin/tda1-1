@@ -1,8 +1,6 @@
 import numpy
 
 import logging
-
-FORMAT = "%(asctime)-15s    %(sort)-8s     %(message)s"
 logging.basicConfig(format=FORMAT, level=logging.INFO)
 
 from graficador import *
@@ -18,31 +16,42 @@ algoritmos = {
 	'seleccion' : seleccion
 }
 
-set_lengths = [50,60,70,80,90,100,110,120,130,140]
+set_lengths = [50,100,500,1000,2000,3000,4000,5000,7500,10000]
+
+def calcular_tiempos_algoritmo(sets,algoritmo):
+	results = {}
+	for set_length in set_lengths:
+		results[set_length] = []
+	for set_length in set_lengths:
+		print('Aplicando a set de {} elementos.'.format(set_length))
+		logging.debug('Aplicando a set de {} elementos.'.format(set_length))
+		for set in sets:
+			vector = set[:set_length]
+			tiempo = performance(vector,algoritmo)
+			results[set_length].append(tiempo)
+	return results
 
 def calcular_tiempos_ejecucion(sets):
 	results = {}
-	results_total = {}
-	for set_lenght in set_lengths:
-		results[set_lenght] = []
 	for clave in algoritmos:
 		algoritmo = algoritmos[clave]
-		for set_length in set_lengths:
-			for set in sets:
-				logging.debug('Calculando tiempo ejecucion de {} con {} elementos.'.format(clave,set_length))
-				vector = set[:set_length]
-				tiempo = performance(vector,algoritmo)
-				results[set_lenght].append(tiempo)
-		results_total[clave] = results[set_length]
-	return results_total
+		print('Calculando tiempos ejecucion de {}.'.format(clave))
+		logging.debug('Calculando tiempos de ejecucion de {}.'.format(clave))
+		tiempos = calcular_tiempos_algoritmo(sets,algoritmo)
+		results[clave] = tiempos
+	return results
 
 def calcular_tiempos_medios(tiempos_ejecucion):
 	tiempos_medios = {}
-	for algoritmo in tiempos_ejecucion:
-		tiempos_medios[algoritmo] = {}
-		for set_length in set_lengths:
-			print('Accediendo a tiempos_ejecucion en {} , {} '.format(algoritmo,set_length))
-			tiempos_medios[algoritmo][set_length] = numpy.mean(tiempos_ejecucion[algoritmo][set_length])
+	print('calcular_tiempos_medios')
+	for key,values in enumerate(tiempos_ejecucion):
+    		print(values)
+	for key,value in enumerate(tiempos_ejecucion):
+		print('tiempos_medios de algoritmo {}'.format(value))
+		tiempos_medios[value] = {}
+		for key_set,set_length_value in enumerate(set_lengths):
+			print('Calculando tiempo medio de {} para {} elementos.'.format(value,set_length_value))
+			tiempos_medios[value][set_length_value] = numpy.mean(tiempos_ejecucion[value][set_length_value])
 	
 	return tiempos_medios
 
@@ -75,6 +84,9 @@ def correr_tp():
 
 	logging.debug('Calculando tiempos de ejecucion para cada set..')
 	tiempos_ejecucion = calcular_tiempos_ejecucion(sets)
+
+#	for i in tiempos_ejecucion:
+#		print(len(tiempos_ejecucion[i]))
 
 	logging.debug('Estimando tiempo medio de cada algoritmo..')
 	tiempos_medios = calcular_tiempos_medios(tiempos_ejecucion)
