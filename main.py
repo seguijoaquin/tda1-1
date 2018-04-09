@@ -1,7 +1,8 @@
 import numpy
 
 import logging
-logging.basicConfig(format=FORMAT, level=logging.INFO)
+FORMAT = "%(asctime)-15s    %(sort)-8s     %(message)s"
+logging.basicConfig(format=FORMAT,filename='main.log', level=logging.INFO)
 
 from graficador import *
 from quicksort import quicksort
@@ -43,11 +44,7 @@ def calcular_tiempos_ejecucion(sets):
 
 def calcular_tiempos_medios(tiempos_ejecucion):
 	tiempos_medios = {}
-	print('calcular_tiempos_medios')
-	for key,values in enumerate(tiempos_ejecucion):
-    		print(values)
 	for key,value in enumerate(tiempos_ejecucion):
-		print('tiempos_medios de algoritmo {}'.format(value))
 		tiempos_medios[value] = {}
 		for key_set,set_length_value in enumerate(set_lengths):
 			print('Calculando tiempo medio de {} para {} elementos.'.format(value,set_length_value))
@@ -60,7 +57,7 @@ def mostrar_resultados(tiempos_medios):
 		print algoritmo
 		for set_length in set_lengths:
 			print('{0:10},{1:10f}'.format(set_length,tiempos_medios[algoritmo][set_length]))
-
+			logging.debug(''.format(set_length,tiempos_medios[algoritmo][set_length]))
 def run_insercion_peor_caso():
 	return 0
 
@@ -84,9 +81,6 @@ def correr_tp():
 
 	logging.debug('Calculando tiempos de ejecucion para cada set..')
 	tiempos_ejecucion = calcular_tiempos_ejecucion(sets)
-
-#	for i in tiempos_ejecucion:
-#		print(len(tiempos_ejecucion[i]))
 
 	logging.debug('Estimando tiempo medio de cada algoritmo..')
 	tiempos_medios = calcular_tiempos_medios(tiempos_ejecucion)
