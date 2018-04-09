@@ -5,7 +5,7 @@ from matplotlib import pyplot as plt
 
 import logging
 FORMAT = "%(asctime)-15s - %(message)s"
-logging.basicConfig(format=FORMAT,filename='main.log',level=logging.INFO)
+logging.basicConfig(format=FORMAT,filename='main.log',level=logging.DEBUG)
 
 def log(val):
 	print(val)
@@ -18,7 +18,7 @@ def performance(vector, algoritmo):
     return time.time()-inicio
 
 def gen_vector(length):
-    return [random.randrange(1000) for _ in range(length)]
+    return [random.randrange(10000) for _ in range(length)]
     
 def graficar_algoritmo(algoritmo, largo=200):
     fig, ax = plt.subplots(1, 1, figsize=(5, 5))

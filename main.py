@@ -31,18 +31,14 @@ def ordenar(sets,algoritmo):
 	for r in rangos:
 		log('Ordenando set de {} elementos.'.format(r))
 		for set in sets:
-			vector = set[:r]
-			tiempo = performance(vector,algoritmo)
-			results[r].append(tiempo)
+			results[r].append(performance(set[:r],algoritmo)
 	return results
 
 def calcular_tiempos_ejecucion(sets):
 	results = {}
 	for clave in algoritmos:
-		algoritmo = algoritmos[clave]
 		log('Calculando tiempos ejecucion de {}.'.format(clave))
-		tiempos = ordenar(sets,algoritmo)
-		results[clave] = tiempos
+		results[clave] = ordenar(sets,algoritmos[clave])
 	return results
 
 def calcular_tiempos_medios(tiempos_ejecucion):
@@ -70,6 +66,12 @@ def graficar(tiempos_medios):
 		plt.ylabel('Tiempo [seg]', fontsize=12)
 		fig.savefig(i + '.png')
 
+def generar_set_desc():
+	return range(10000,0,-1)
+
+def peores_casos():
+	set_desc = generar_set_desc()
+	
 
 def correr_tp():
 	log('Construyendo sets de numeros aleatorios..')
@@ -86,6 +88,11 @@ def correr_tp():
 
 	log('Graficando Resultados:')
 	graficar(tiempos_medios)
+
+#	log('Construyendo peores casos..')
+#	peores_casos()
+	
+#	log('Ejecutando Gale-Shapley')
 
 if __name__ == '__main__':
 	correr_tp()
