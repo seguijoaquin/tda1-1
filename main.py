@@ -18,7 +18,7 @@ algoritmos = {
 	'seleccion' : seleccion
 }
 
-set_lengths = [50,100,500,1000,2000,3000,4000,5000,7500,10000]
+set_lengths = [50,60,70,80,90,100,110,120,130,140]
 
 def calcular_tiempos_ejecucion(sets):
 	results = {}
@@ -41,7 +41,7 @@ def calcular_tiempos_medios(tiempos_ejecucion):
 	for algoritmo in tiempos_ejecucion:
 		tiempos_medios[algoritmo] = {}
 		for set_length in set_lengths:
-			logging.debug('Accediendo a tiempos_ejecucion en {} , {} ',format(algoritmo,set_length))
+			print('Accediendo a tiempos_ejecucion en {} , {} '.format(algoritmo,set_length))
 			tiempos_medios[algoritmo][set_length] = numpy.mean(tiempos_ejecucion[algoritmo][set_length])
 	
 	return tiempos_medios
@@ -70,7 +70,7 @@ def run_heapsort_peor_caso():
 def correr_tp():
 	logging.debug('Construyendo sets de numeros aleatorios..')
 	sets = []
-	for i in range(0, 10):
+	for i in enumerate(set_lengths):
 		sets.append(gen_vector(10000))
 
 	logging.debug('Calculando tiempos de ejecucion para cada set..')
