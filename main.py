@@ -8,9 +8,9 @@ from seleccion import seleccion
 
 algoritmos = {
 	'Quicksort' : quicksort,
-	'Mergesort' : merge_sort
-#	'Insercion' : insercion,
-#	'Seleccion' : seleccion
+	'Mergesort' : merge_sort,
+	'Insercion' : insercion,
+	'Seleccion' : seleccion
 }
 
 set_lengths = [50,100,500,1000,2000,3000,4000,5000,7500,10000]
@@ -52,41 +52,23 @@ def mostrar_resultados(tiempos_medios):
 		for set_length in set_lengths:
 			log('{0:10},{1:10f}'.format(set_length,tiempos_medios[algoritmo][set_length]))
 
-def graficar(largo=200):
-	for algo in algoritmos:
-		fig, ax = plt.subplots(1, 1, figsize=(8, 5))
-		vectores = [gen_vector(i*3) for i in range(largo)]
-		largos = [len(v) for v in vectores]
-		performs = [performance(v, algoritmos[algo]) for v in vectores]
-		ax.plot(largos, performs)
-		fig.suptitle(algo, fontsize=20)
-		plt.xlabel('Elementos', fontsize=18)
-		plt.ylabel('Tiempo', fontsize=16)
-		fig.savefig(algo + '.png')
+def graficar(tiempos_medios):
+	elementos = []
+	tiempo = []
+	for i in tiempos_medios:
+#		for j in tiempos_medios[i]:
+#			elementos.append(j)
+#			tiempo.append(tiempos_medios[i][j])
+		fig, ax = plt.subplots(1,1, figsize=(8, 6))
+		ax.plot(*zip(*sorted(tiempos_medios[i].items())))
+#		ax.plot([j for j in tiempos_medios[i]], [tiempos_medios[i][j] for j in tiempos_medios[i]])
+		fig.suptitle(i, fontsize=16)
+		plt.xlabel('Elementos [un]', fontsize=12)
+		plt.ylabel('Tiempo [seg]', fontsize=12)
+		fig.savefig(i + '.png')
+		elementos = []
+		tiempo = []
 
-
-
-def run_insercion_peor_caso():
-	return 0
-
-def run_quicksort_peor_caso():
-	return 0
-
-def run_mergesort_peor_caso():
-	return 0
-
-def run_seleccion_peor_caso():
-	return 0
-
-def run_heapsort_peor_caso():
-	return 0
-
-def run_peores_casos():
-        run_insercion_peor_caso()
-        run_quicksort_peor_caso()
-        run_mergesort_peor_caso()
-        run_seleccion_peor_caso()
-        run_heapsort_peor_caso()
 
 def correr_tp():
 	log('Construyendo sets de numeros aleatorios..')
@@ -104,11 +86,7 @@ def correr_tp():
 	mostrar_resultados(tiempos_medios)
 
 	log('Graficando Resultados:')
-#	graficar(tiempos_medios)
-	graficar()
-
-	log('Calculando tiempos de ejecucion en el peor caso..')
-	run_peores_casos()
+	graficar(tiempos_medios)
 
 if __name__ == '__main__':
 	correr_tp()
