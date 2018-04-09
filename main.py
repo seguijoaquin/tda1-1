@@ -1,8 +1,8 @@
 import numpy
 
 import logging
-FORMAT = "%(asctime)-15s    %(sort)-8s     %(message)s"
-logging.basicConfig(format=FORMAT,filename='main.log', level=logging.INFO)
+FORMAT = "%(asctime)-15s - %(message)s"
+logging.basicConfig(format=FORMAT,filename='main.log',level=logging.DEBUG)
 
 from graficador import *
 from quicksort import quicksort
@@ -54,10 +54,12 @@ def calcular_tiempos_medios(tiempos_ejecucion):
 
 def mostrar_resultados(tiempos_medios):
 	for algoritmo in tiempos_medios:
-		print algoritmo
+		print (algoritmo)
+		logging.debug('Algoritmo: {}'.format(algoritmo))
 		for set_length in set_lengths:
 			print('{0:10},{1:10f}'.format(set_length,tiempos_medios[algoritmo][set_length]))
-			logging.debug(''.format(set_length,tiempos_medios[algoritmo][set_length]))
+			logging.debug('{0:10},{1:10f}'.format(set_length,tiempos_medios[algoritmo][set_length]))
+
 def run_insercion_peor_caso():
 	return 0
 
