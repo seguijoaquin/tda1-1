@@ -3,6 +3,15 @@ import time
 import random
 from matplotlib import pyplot as plt
 
+import logging
+FORMAT = "%(asctime)-15s - %(message)s"
+logging.basicConfig(format=FORMAT,filename='main.log',level=logging.INFO)
+
+def log(val):
+	print(val)
+	logging.debug(val)
+
+
 def performance(vector, algoritmo):
     inicio = time.time()
     algoritmo(vector)
