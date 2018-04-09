@@ -7,6 +7,7 @@ class Heap:
     def __init__(self, datos):
         self.datos = datos
         self.heapify()
+        print('heapeado: ', self.datos)
         
     def downheap(self,indice):
         hayHijoIzquierdo = len(self.datos) - 1 >= (2*indice + 1)
@@ -39,8 +40,7 @@ class Heap:
                 indice = int((indice-1)/2)
 
     def heapify(self):
-        for i in range(int(len(self.datos)/2),-1,-1):
-            self.datos[len(self.datos) - 1],self.datos[i] = self.datos[i],self.datos[len(self.datos) - 1]
+        for i in range(int(len(self.datos)/2)-1,-1,-1):
             self.downheap(i)
             
     def push(self, elemento):
