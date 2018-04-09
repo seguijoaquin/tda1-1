@@ -31,7 +31,7 @@ def ordenar(sets,algoritmo):
 	for r in rangos:
 		log('Ordenando set de {} elementos.'.format(r))
 		for set in sets:
-			results[r].append(performance(set[:r],algoritmo)
+			results[r].append(performance(set[:r],algoritmo))
 	return results
 
 def calcular_tiempos_ejecucion(sets):
