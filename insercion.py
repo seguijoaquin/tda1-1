@@ -1,5 +1,5 @@
-import logging
-logging.basicConfig(filename='insercion.log', level=logging.DEBUG)
+#import logging
+#logging.basicConfig(filename='insercion.log', level=logging.DEBUG)
 
 def insercion (list) :
   for i in range(1,len(list)) :

@@ -1,5 +1,5 @@
-import logging
-logging.basicConfig(filename='merge.log', level=logging.DEBUG)
+#import logging
+#logging.basicConfig(filename='merge.log', level=logging.DEBUG)
 
 def merge(izquierdo, derecho):
     resultado = []
