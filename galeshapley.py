@@ -23,9 +23,9 @@ def galeshapley(conjuntoA, conjuntoB, preferenciasConjuntoA, preferenciasConjunt
         if not ocupadosDeB.__contains__(elementoB):
             # Lo inserto en la seleccion final
             if not seleccion.__contains__(elementoA):
-                seleccion.__setitem__(elementoA, [elementoB])
+                seleccion.__setitem__(elementoA, {elementoB})
             else:
-                seleccion.get(elementoA).append(elementoB)
+                seleccion.get(elementoA).add(elementoB)
             # Lo marco como ocupado
             ocupadosDeB.__setitem__(elementoB, elementoA)
         # Si esta ocupado
@@ -36,12 +36,12 @@ def galeshapley(conjuntoA, conjuntoB, preferenciasConjuntoA, preferenciasConjunt
             if preferenciasConjuntoB[elementoB][1].get(elementoDeAAsignado) > preferenciasConjuntoB[elementoB][1].get(elementoA):
                 # El A se queda con el B
                 if not seleccion.__contains__(elementoA):
-                    seleccion.__setitem__(elementoA, [elementoB])
+                    seleccion.__setitem__(elementoA, {elementoB})
                 else:
-                    seleccion.get(elementoA).append(elementoB)
+                    seleccion.get(elementoA).add(elementoB)
                 ocupadosDeB.__setitem__(elementoB, elementoA)
                 # El A anterior se queda sin el B
-                seleccion[elementoDeAAsignado].pop(seleccion[elementoDeAAsignado].index(elementoB))
+                seleccion[elementoDeAAsignado].discard(elementoB)
                 # Si el A anterior ya estaba completo
                 if len(seleccion[elementoDeAAsignado]) == (lenVacantesDeElementoA - 1):
                     # Vuelve a tener que buscar otros B para completar
