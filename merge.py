@@ -3,17 +3,21 @@
 
 def merge(izquierdo, derecho):
     resultado = []
-    while izquierdo and derecho:
-        if izquierdo[0] < derecho[0]:
-            resultado.append(izquierdo[0])
-            izquierdo.remove(izquierdo[0])
+    i = 0
+    j = 0
+    while i < len(izquierdo) and j < len(derecho):
+        if izquierdo[i] < derecho[j]:
+            resultado.append(izquierdo[i])
+            i+=1
         else:
-            resultado.append(derecho[0])
-            derecho.remove(derecho[0])
-    if not izquierdo:
-        resultado += derecho
-    if not derecho:
-        resultado += izquierdo
+            resultado.append(derecho[j])
+            j+=1
+    # Si quedan elementos en izquierdo los sumo
+    if i < len(izquierdo):
+        resultado += izquierdo[i:]
+    # Si quedan elementos en derecho los sumo
+    if j < len(derecho):
+        resultado += derecho[j:]
     return resultado
 
 def merge_sort(vector):

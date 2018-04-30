@@ -8,11 +8,11 @@ from seleccion import seleccion
 from heapsort import heapsort
 
 algoritmos = {
-#	'Quicksort' : quicksort,
-#	'Mergesort' : merge_sort,
+	'Quicksort' : quicksort,
+	'Mergesort' : merge_sort,
 	'Insercion' : insercion,
 	'Seleccion' : seleccion,
-#	'Heapsort' : heapsort
+	'Heapsort' : heapsort
 }
 
 rangos = [50,100,500,1000,2000,3000,4000,5000,7500,10000]

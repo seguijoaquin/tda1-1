@@ -19,4 +19,3 @@ class Merge(unittest.TestCase):
         arreglo = [2,4,5,0,3,7,1,2,5,6]
         final =   [0,1,2,2,3,4,5,5,6,7]
         self.assertEqual(merge_sort(arreglo), final)
-        
