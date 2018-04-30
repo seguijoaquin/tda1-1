@@ -4,7 +4,7 @@ def quicksort (list):
 
 def aux_quicksort (list,left,right):
 	if left<right :
-		pivot=list[(right+left)//2]
+		pivot=list[left+1]
 		l,r=left,right
 		while l<=r :
 			while list[l]<pivot : l+=1

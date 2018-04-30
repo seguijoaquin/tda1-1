@@ -1,6 +1,7 @@
 import numpy
+import sys
 
-from helpers import log, performance, gen_vector, graficar
+from helpers import log, performance, gen_vector, graficar, graficarAmbos
 from quicksort import quicksort
 from merge import merge_sort
 from insercion import insercion
@@ -19,7 +20,7 @@ rangos = [50,100,500,1000,2000,3000,4000,5000,7500,10000]
 
 def construir_sets():
 	sets = []
-	for i in enumerate(rangos):
+	for _ in enumerate(rangos):
 		sets.append(gen_vector(10000))
 	return sets
 
@@ -46,9 +47,9 @@ def calcular_tiempos_ejecucion(sets):
 
 def calcular_tiempos_medios(tiempos_ejecucion):
 	tiempos_medios = {}
-	for key,value in enumerate(tiempos_ejecucion):
+	for _,value in enumerate(tiempos_ejecucion):
 		tiempos_medios[value] = {}
-		for key_set,r_value in enumerate(rangos):
+		for _,r_value in enumerate(rangos):
 			tiempos_medios[value][r_value] = numpy.mean(tiempos_ejecucion[value][r_value])
 			log('-- Tiempo medio de {} para {} elementos [s]: {}'.format(value,r_value,tiempos_medios[value][r_value]))
 	
@@ -61,6 +62,9 @@ def mostrar_resultados(tiempos_medios):
 			log('{0:10}: {1:10f} s'.format(r,tiempos_medios[algoritmo][r]))
 
 def correr_tp():
+
+	sys.setrecursionlimit(1000000) # Avoiding Recursive Quicksort overflow
+
 	log('- Construyendo 10 sets de numeros aleatorios de 1 a 1000..')
 	sets = construir_sets()
 
@@ -90,6 +94,8 @@ def correr_tp():
 
 	log('- Graficando Resultados peor caso: OK')
 	graficar(tiempos_medios_pc,True)
+
+	graficarAmbos(tiempos_medios,tiempos_medios_pc)
 
 if __name__ == '__main__':
 	correr_tp()
