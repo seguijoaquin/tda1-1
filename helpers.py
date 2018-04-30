@@ -18,7 +18,12 @@ def performance(vector, algoritmo):
     return time.time()-inicio
 
 def gen_vector(length):
-    return [random.randrange(1000) for _ in range(length)]
+    i = 0
+    vector = []
+    while i < length:
+        vector.append(random.randrange(1000))
+        i+=1
+    return vector
 
 def graficar(tiempos_medios,peorCaso=False):
 	file_suffix = '_peor_caso' if peorCaso else ''
@@ -43,6 +48,19 @@ def graficarAmbos(tiempos_medios,tiempos_medios_pc):
         plt.xlabel('Elementos [un]', fontsize=12)
         plt.ylabel('Tiempo [seg]', fontsize=12)
         fig.savefig(i + '_ambos.png')
+        
+def graficarTeoricos(tiempos_medios,tiempos_medios_teoricos):
+    for i in tiempos_medios:
+        fig, ax = plt.subplots(1,1, figsize=(8, 6))
+        line1, = ax.plot(*zip(*sorted(tiempos_medios[i].items())),label="Caso Promedio", linewidth=4)
+        line2, = ax.plot(*zip(*sorted(tiempos_medios_teoricos[i].items())),label="Caso Teorico", linestyle='--')
+        first_legend = plt.legend(handles=[line1], loc=4)
+        ax.add_artist(first_legend)
+        ax.legend(handles=[line2], loc=1)
+        fig.suptitle(i + ' Promedio y Teorico', fontsize=16)
+        plt.xlabel('Elementos [un]', fontsize=12)
+        plt.ylabel('Tiempo [seg]', fontsize=12)
+        fig.savefig(i + '_ambos_teoricos.png')
 
 def dump(obj, nested_level=0, output=sys.stdout):
     spacing = '   '

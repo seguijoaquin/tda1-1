@@ -1,13 +1,9 @@
 
 class Heap:
-    
-    def __init__(self):
-        self.datos = []
-    
+        
     def __init__(self, datos):
         self.datos = datos
         self.heapify()
-        print('heapeado: ', self.datos)
         
     def downheap(self,indice):
         hayHijoIzquierdo = len(self.datos) - 1 >= (2*indice + 1)
@@ -38,7 +34,9 @@ class Heap:
             if padre > self.datos[indice]:
                 self.datos[indice],self.datos[int((indice-1)/2)] = self.datos[int((indice-1)/2)],self.datos[indice]
                 indice = int((indice-1)/2)
-
+            else:
+                return
+            
     def heapify(self):
         for i in range(int(len(self.datos)/2)-1,-1,-1):
             self.downheap(i)
@@ -51,9 +49,9 @@ class Heap:
         raiz = self.datos[0]
         self.datos[len(self.datos) - 1],self.datos[0] = self.datos[0],self.datos[len(self.datos) - 1]
         minimo = self.datos.pop()
-        if self.size() > 0:
+        if len(self) > 0:
             self.downheap(0)
         return minimo
     
-    def size(self):
+    def __len__(self):
         return len(self.datos)
