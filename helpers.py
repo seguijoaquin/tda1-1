@@ -20,14 +20,6 @@ def performance(vector, algoritmo):
 
 def gen_vector(length):
     return [random.randrange(1000) for _ in range(length)]
-    
-def graficar_algoritmo(algoritmo, largo=200):
-    fig, ax = plt.subplots(1, 1, figsize=(5, 5))
-    vectores = [gen_vector(i*3) for i in range(largo)]
-    largos = [len(v) for v in vectores]
-    performs = [performance(v, algoritmo) for v in vectores]
-    ax.plot(largos, performs)
-    return ax
 
 def graficar(tiempos_medios,peorCaso=False):
 	file_suffix = '_peor_caso' if peorCaso else ''
@@ -39,6 +31,19 @@ def graficar(tiempos_medios,peorCaso=False):
 		plt.xlabel('Elementos [un]', fontsize=12)
 		plt.ylabel('Tiempo [seg]', fontsize=12)
 		fig.savefig(i + file_suffix + '.png')
+
+def graficarAmbos(tiempos_medios,tiempos_medios_pc):
+    for i in tiempos_medios:
+        fig, ax = plt.subplots(1,1, figsize=(8, 6))
+        line1, = ax.plot(*zip(*sorted(tiempos_medios[i].items())),label="Caso Promedio", linewidth=4)
+        line2, = ax.plot(*zip(*sorted(tiempos_medios_pc[i].items())),label="Peor Caso", linestyle='--')
+        first_legend = plt.legend(handles=[line1], loc=4)
+        ax.add_artist(first_legend)
+        ax.legend(handles=[line2], loc=1)
+        fig.suptitle(i + ' Promedio y Peor Caso', fontsize=16)
+        plt.xlabel('Elementos [un]', fontsize=12)
+        plt.ylabel('Tiempo [seg]', fontsize=12)
+        fig.savefig(i + '_ambos.png')
 
 def dump(obj, nested_level=0, output=sys.stdout):
     spacing = '   '
