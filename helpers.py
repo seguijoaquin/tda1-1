@@ -4,14 +4,13 @@ import random
 import sys
 from matplotlib import pyplot as plt
 
-#import logging
-#FORMAT = "%(asctime)-15s - %(message)s"
-#logging.basicConfig(format=FORMAT,filename='main.log',level=logging.DEBUG)
+import logging
+FORMAT = "%(asctime)-15s - %(message)s"
+logging.basicConfig(format=FORMAT,filename='tp.log',level=logging.DEBUG)
 
 def log(val):
+    logging.debug(val)
     dump(val)
-    #print(val)
-	#logging.debug(val)
 
 def performance(vector, algoritmo):
     inicio = time.time()
